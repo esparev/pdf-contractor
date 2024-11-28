@@ -1,0 +1,5 @@
+# Ignore artifacts
+.next
+.husky
+public
+package-lock.json

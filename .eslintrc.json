@@ -1,0 +1,49 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "es6": true
+  },
+  "extends": [
+    "next/typescript",
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "plugin:import/typescript",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-perf/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "n", "react", "react-hooks", "react-perf", "jsx-a11y"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "capitalized-comments": ["error", "always"],
+    "spaced-comment": ["error", "always"],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-console": "error"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".next",
+    ".husky",
+    "public",
+    "*.png",
+    "*.jpg",
+    "*.jpeg",
+    "*.gif",
+    "*.svg",
+    "*.webp",
+    "*.ico",
+    "*.json",
+    "*.xml",
+    "*.css",
+    "*.pdf",
+    "*.md"
+  ]
+}
