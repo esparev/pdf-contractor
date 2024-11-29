@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 // Local Libs
 import { inter } from '@app/app/fonts';
+import { ThemeProvider } from '@app/app/_libs/client-providers';
 // Utils
 import { cn } from '@app/utils/cn';
 // Styles
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="es-mx">
-      <body className={cn('flex min-h-screen flex-col', inter.variable)}>{children}</body>
+      <ThemeProvider>
+        <body className={cn('flex min-h-screen flex-col', inter.variable)}>{children}</body>
+      </ThemeProvider>
     </html>
   );
 }
