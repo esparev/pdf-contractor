@@ -6,4 +6,20 @@ declare module '@material-tailwind/react' {
     onPointerEnterCapture?: never;
     onPointerLeaveCapture?: never;
   }
+  interface SelectProps {
+    placeholder?: never;
+    onPointerEnterCapture?: never;
+    onPointerLeaveCapture?: never;
+  }
+  interface OptionProps {
+    placeholder?: never;
+    onPointerEnterCapture?: never;
+    onPointerLeaveCapture?: never;
+  }
+  interface RadioProps {
+    placeholder?: never;
+    crossOrigin?: never;
+    onPointerEnterCapture?: never;
+    onPointerLeaveCapture?: never;
+  }
 }
