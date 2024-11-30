@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faFileCirclePlus, faGear } from '@fortawesome/free-solid-svg-icons';
+// Layouts
+import { ContainerLayout } from '@app/layouts/container-layout';
 // Components
 import { Typography } from '@app/components/ui/typography';
 
 export function HomeModule() {
   return (
-    <div className="container mx-auto flex flex-col items-start justify-center gap-5 px-9 py-12">
-      <Typography.Heading.H2 className="font-semibold">Dashboard</Typography.Heading.H2>
+    <ContainerLayout title="Dashboard">
       <HomeModule.Widgets>
         <HomeModule.Widget
           icon={faFileCirclePlus}
@@ -22,7 +23,7 @@ export function HomeModule() {
         <HomeModule.Widget icon={faGear} title="Configuración" href="/settings" description="Configura la plataforma" />
         <HomeModule.WidgetComingSoon />
       </HomeModule.Widgets>
-    </div>
+    </ContainerLayout>
   );
 }
 
