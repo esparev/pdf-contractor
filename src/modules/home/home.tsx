@@ -2,6 +2,7 @@
 
 // Libs
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faFileCirclePlus, faGear } from '@fortawesome/free-solid-svg-icons';
@@ -9,19 +10,41 @@ import { faFileCirclePlus, faGear } from '@fortawesome/free-solid-svg-icons';
 import { ContainerLayout } from '@app/layouts/container-layout';
 // Components
 import { Typography } from '@app/components/ui/typography';
+// Hooks
+import { useGetDictionary } from '@app/hooks/useDictionaries';
+// Definitions
+import type { Locale } from '@app/i18n';
 
 export function HomeModule() {
+  const { lang } = useParams();
+  const { data: dictionary, isLoading } = useGetDictionary(lang as Locale);
+
   return (
-    <ContainerLayout title="Dashboard">
+    <ContainerLayout title={dictionary?.home.title ?? 'Dashboard'}>
       <HomeModule.Widgets>
-        <HomeModule.Widget
-          icon={faFileCirclePlus}
-          title="Crear contrato"
-          href="/contracts/create"
-          description="Crea un contrato en minutos"
-        />
-        <HomeModule.Widget icon={faGear} title="Configuración" href="/settings" description="Configura la plataforma" />
-        <HomeModule.WidgetComingSoon />
+        {isLoading ? (
+          <>
+            <HomeModule.WidgetSkeleton />
+            <HomeModule.WidgetSkeleton />
+            <HomeModule.WidgetSkeleton />
+          </>
+        ) : (
+          <>
+            <HomeModule.Widget
+              icon={faFileCirclePlus}
+              title={dictionary?.home.modules.create_contract.title ?? 'Crear contrato'}
+              href="/contracts/create"
+              description={dictionary?.home.modules.create_contract.description ?? 'Crea un contrato en minutos'}
+            />
+            <HomeModule.Widget
+              icon={faGear}
+              title={dictionary?.home.modules.settings.title ?? 'Configuración'}
+              href="/settings"
+              description={dictionary?.home.modules.settings.description ?? 'Configura la plataforma'}
+            />
+            <HomeModule.WidgetComingSoon title={dictionary?.home.modules.unavailable.title ?? 'Aún No Disponible'} />
+          </>
+        )}
       </HomeModule.Widgets>
     </ContainerLayout>
   );
@@ -70,10 +93,12 @@ const WidgetSkeleton = () => {
   );
 };
 
-const WidgetComingSoon = () => {
+type WidgetComingSoonProps = { title: string };
+
+const WidgetComingSoon = (props: WidgetComingSoonProps) => {
   return (
     <div className="flex min-h-24 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 p-6">
-      <Typography.Heading.H5 className="text-center text-gray-500">Aún No Disponible</Typography.Heading.H5>
+      <Typography.Heading.H5 className="text-center text-gray-500">{props.title}</Typography.Heading.H5>
     </div>
   );
 };

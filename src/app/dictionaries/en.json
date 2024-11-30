@@ -1,0 +1,49 @@
+{
+  "not_found": {
+    "title": "We couldn't find what you were looking for",
+    "description": "The content you are looking for does not exist.",
+    "button": "Go Back"
+  },
+  "error": {
+    "title": "An error occurred",
+    "description": "An error occurred while loading the content. Please try again or go back to the home page.",
+    "try_again_button": "Try Again",
+    "go_back_button": "Go Back"
+  },
+  "home": {
+    "title": "Dashboard",
+    "modules": {
+      "create_contract": {
+        "title": "Create Contract",
+        "description": "Create a contract in minutes"
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure the platform"
+      },
+      "unavailable": {
+        "title": "Unavailable"
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "modules": {
+      "language": {
+        "title": "Language",
+        "description": "Change the language of the platform",
+        "placeholder": "Select Language"
+      },
+      "theme": {
+        "title": "Theme",
+        "description": "Change the theme of the platform",
+        "placeholder": "Select Theme",
+        "values": {
+          "light": "Light",
+          "dark": "Dark",
+          "system": "System"
+        }
+      }
+    }
+  }
+}

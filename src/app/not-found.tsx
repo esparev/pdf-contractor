@@ -6,20 +6,29 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@material-tailwind/react';
 // Components
 import { Typography } from '@app/components/ui/typography';
+// Hooks
+import { useGetDictionary } from '@app/hooks/useDictionaries';
+// Config
+import type { Locale } from '@app/i18n';
+import { i18n, useLocaleFromBrowser } from '@app/i18n';
 
 export default function NotFoundPage() {
   const router = useRouter();
   const handleBack = useCallback(() => router.back(), [router]);
 
+  const lang = useLocaleFromBrowser();
+  const locale = i18n.locales.includes(lang as Locale) ? (lang as Locale) : i18n.defaultLocale;
+  const { data: dictionary } = useGetDictionary(locale);
+
+  if (!dictionary) return null;
+
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 px-9">
       <NotFoundPage.Illustration className="size-48" />
-      <Typography.Heading.H1 className="text-center font-semibold">No se encontró el contenido</Typography.Heading.H1>
-      <Typography.Paragraph.P className="text-center text-lg text-gray-500">
-        El contenido que estás buscando no existe. Por favor, verifica la URL o regresa al inicio.
-      </Typography.Paragraph.P>
+      <Typography.Heading.H1 className="text-center font-semibold">{dictionary.not_found.title}</Typography.Heading.H1>
+      <Typography.Paragraph.P className="text-center text-lg text-gray-500">{dictionary.not_found.description}</Typography.Paragraph.P>
       <Button className="text-sm" onClick={handleBack}>
-        Regresar
+        {dictionary.not_found.button}
       </Button>
     </div>
   );

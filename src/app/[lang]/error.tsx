@@ -6,24 +6,33 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@material-tailwind/react';
 // Components
 import { Typography } from '@app/components/ui/typography';
+// Hooks
+import { useGetDictionary } from '@app/hooks/useDictionaries';
+// Config
+import type { Locale } from '@app/i18n';
+import { i18n, useLocaleFromBrowser } from '@app/i18n';
 
 export default function ErrorPage({ reset }: { reset: () => void }) {
   const router = useRouter();
   const handleBack = useCallback(() => router.back(), [router]);
 
+  const lang = useLocaleFromBrowser();
+  const locale = i18n.locales.includes(lang as Locale) ? (lang as Locale) : i18n.defaultLocale;
+  const { data: dictionary } = useGetDictionary(locale);
+
+  if (!dictionary) return null;
+
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 px-9">
       <ErrorPage.Illustration className="size-64 md:size-96" />
-      <Typography.Heading.H1 className="text-center font-semibold">Ocurrió un error</Typography.Heading.H1>
-      <Typography.Paragraph.P className="text-center text-lg text-gray-500">
-        Ocurrió un error al cargar el contenido. Por favor, intenta de nuevo o regresa al inicio.
-      </Typography.Paragraph.P>
+      <Typography.Heading.H1 className="text-center font-semibold">{dictionary.error.title}</Typography.Heading.H1>
+      <Typography.Paragraph.P className="text-center text-lg text-gray-500">{dictionary.error.description}</Typography.Paragraph.P>
       <div className="grid grid-cols-2 gap-4">
         <Button className="text-sm" onClick={reset}>
-          Intentar de nuevo
+          {dictionary.error.try_again_button}
         </Button>
         <Button className="border border-gray-300 bg-white text-sm text-black" onClick={handleBack}>
-          Regresar
+          {dictionary.error.go_back_button}
         </Button>
       </div>
     </div>

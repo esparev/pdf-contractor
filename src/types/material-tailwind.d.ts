@@ -6,6 +6,11 @@ declare module '@material-tailwind/react' {
     onPointerEnterCapture?: never;
     onPointerLeaveCapture?: never;
   }
+  interface IconButtonProps {
+    placeholder?: never;
+    onPointerEnterCapture?: never;
+    onPointerLeaveCapture?: never;
+  }
   interface SelectProps {
     placeholder?: never;
     onPointerEnterCapture?: never;

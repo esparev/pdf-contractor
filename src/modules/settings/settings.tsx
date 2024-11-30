@@ -3,6 +3,7 @@
 // Libs
 import Image from 'next/image';
 import { cloneElement } from 'react';
+import { useParams } from 'next/navigation';
 import { Select, Option } from '@material-tailwind/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faDesktop } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +11,10 @@ import { faMoon, faSun, faDesktop } from '@fortawesome/free-solid-svg-icons';
 import { ContainerLayout } from '@app/layouts/container-layout';
 // Components
 import { Typography } from '@app/components/ui/typography';
+// Hooks
+import { useGetDictionary } from '@app/hooks/useDictionaries';
+// Definitions
+import type { Locale } from '@app/i18n';
 // Assets
 import MexicoFlag from '@app/assets/images/mexico.png';
 import UnitedStatesFlag from '@app/assets/images/united-states.png';
@@ -25,11 +30,14 @@ const handleSelected = (element: React.ReactElement | undefined) =>
 // prettier-ignore-end
 
 export function SettingsModule() {
+  const { lang } = useParams();
+  const { data: dictionary } = useGetDictionary(lang as Locale);
+
   return (
-    <ContainerLayout title="Settings">
+    <ContainerLayout title={dictionary?.settings.title ?? 'Configuración'} hasBackButton>
       <SettingsModule.Modules>
-        <SettingsModule.Module title="Language">
-          <Select size="lg" label="Select Language" selected={handleSelected}>
+        <SettingsModule.Module title={dictionary?.settings.modules.language.title ?? 'Idioma'}>
+          <Select size="lg" label={dictionary?.settings.modules.language.placeholder ?? 'Seleccionar Idioma'} selected={handleSelected}>
             <Option value="es-mx" className="flex items-center gap-2">
               <Image src={MexicoFlag} alt="es" className="size-6 object-cover" width={128} height={128} />
               Español
@@ -40,19 +48,19 @@ export function SettingsModule() {
             </Option>
           </Select>
         </SettingsModule.Module>
-        <SettingsModule.Module title="Theme">
-          <Select size="lg" label="Select Theme" selected={handleSelected}>
+        <SettingsModule.Module title={dictionary?.settings.modules.theme.title ?? 'Tema'}>
+          <Select size="lg" label={dictionary?.settings.modules.theme.placeholder ?? 'Seleccionar Tema'} selected={handleSelected}>
             <Option value="light" className="flex items-center gap-2">
               <FontAwesomeIcon icon={faSun} className="size-5" />
-              Light
+              {dictionary?.settings.modules.theme.values.light ?? 'Claro'}
             </Option>
             <Option value="dark" className="flex items-center gap-2">
               <FontAwesomeIcon icon={faMoon} className="size-5" />
-              Dark
+              {dictionary?.settings.modules.theme.values.dark ?? 'Oscuro'}
             </Option>
             <Option value="system" className="flex items-center gap-2">
               <FontAwesomeIcon icon={faDesktop} className="size-5" />
-              System
+              {dictionary?.settings.modules.theme.values.system ?? 'Sistema'}
             </Option>
           </Select>
         </SettingsModule.Module>

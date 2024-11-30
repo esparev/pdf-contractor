@@ -1,0 +1,49 @@
+{
+  "not_found": {
+    "title": "No se encontró el contenido",
+    "description": "El contenido que estás buscando no existe.",
+    "button": "Regresar"
+  },
+  "error": {
+    "title": "Ocurrió un error",
+    "description": "Ocurrió un error al cargar el contenido. Por favor, intenta de nuevo o regresa al inicio.",
+    "try_again_button": "Intentar de nuevo",
+    "go_back_button": "Regresar"
+  },
+  "home": {
+    "title": "Dashboard",
+    "modules": {
+      "create_contract": {
+        "title": "Crear contrato",
+        "description": "Crea un contrato en minutos"
+      },
+      "settings": {
+        "title": "Configuración",
+        "description": "Configura la plataforma"
+      },
+      "unavailable": {
+        "title": "Aún No Disponible"
+      }
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "modules": {
+      "language": {
+        "title": "Idioma",
+        "description": "Cambia el idioma de la plataforma",
+        "placeholder": "Seleccionar Idioma"
+      },
+      "theme": {
+        "title": "Tema",
+        "description": "Cambia el tema de la plataforma",
+        "placeholder": "Seleccionar Tema",
+        "values": {
+          "light": "Claro",
+          "dark": "Oscuro",
+          "system": "Sistema"
+        }
+      }
+    }
+  }
+}
